@@ -131,7 +131,15 @@
         .pack-card ul { list-style: none; padding: 0; text-align: left; margin: 15px 0; }
         .pack-card ul li { margin-bottom: 10px; }
         .pack-card ul li::before { content: '★'; color: var(--accent-color); margin-right: 10px; font-weight: bold; }
-        .pack-card .figurine-preview { width: 100%; max-width: 250px; margin: 20px auto 0; } /* Ajustement du margin */
+        .pack-card .figurine-preview { width: 100%; max-width: 500px; margin: 20px auto 0; }/* NOUVEAU : Taille spécifique pour chaque image */
+#pack-aventurier-img {
+    max-width: 350px; /* <- MODIFIEZ CETTE VALEUR pour la première image */
+}
+
+#pack-collectionneur-img {
+    max-width: 350x; /* <- MODIFIEZ CETTE VALEUR pour la deuxième image */
+} 
+/* Ajustement du margin */
         .goodies-carousel-container { background-color: var(--dark-color); padding: 60px 0; }
         .goodies-carousel-container h2 { color: var(--accent-color); text-shadow: 2px 2px var(--primary-color); }
         .goodies-carousel { max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; }
@@ -339,15 +347,15 @@
                                 <li>Jeu Robin's</li>
                             </ul>
                             <!-- IMAGE AJOUTÉE ICI -->
-                            <img src="images/image_pack_aventurier.png" alt="Contenu du Pack Aventurier" class="figurine-preview">
+                            <img src="images/pack_aventurier.png" alt="Contenu du Pack Aventurier" class="figurine-preview">
                         </div>
                         <a href="#" class="btn-primary" style="margin-top: 20px;">Acheter</a>
                     </div>
                     <!-- --- FIN DE LA MODIFICATION --- -->
 
                     <div class="pack-card">
-                        <div><h3>Coffret Collectionneur</h3><p class="price">117€</p><ul><li>Console de jeu personnalisable</li><li>2 manettes de jeu</li><li>Jeu Robin's</li><li>3 Figurines customs</li><li>1 porte clef collector</li><li>T-shirt Robin's</1li></ul>
-                        <img src="images/robin_face.png" alt="Figurine de Robin" class="figurine-preview">
+                        <div><h3>Pack Collectionneur</h3><p class="price">117€</p><ul><li>Console de jeu personnalisable</li><li>2 manettes de jeu</li><li>Jeu Robin's</li><li>3 Figurines customs</li><li>1 porte clef collector</li><li>T-shirt Robin's</1li></ul>
+                        <img src="images/pack_collectionneur.png" alt="Figurine de Robin" class="figurine-preview">
                         </div>
                         <a href="#" class="btn-primary" style="margin-top: 20px;">Acheter</a>
                     </div>
