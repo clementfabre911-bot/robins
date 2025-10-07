@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin's - L'Aventure Légendaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50; --secondary-color: #8BC34A; --accent-color: #FFD700;
+            --dark-color: #2E7D32; --text-color: #333; --light-text-color: #f8f8f8;
+            --bg-light: #f0f8f0; --bg-dark: #1b5e20;
+        }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body { font-family: 'Roboto', sans-serif; margin: 0; background-color: var(--bg-light); color: var(--text-color); line-height: 1.6; }
+        header { background-color: var(--primary-color); padding: 1rem 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .logo { font-family: 'Press Start 2P', cursive; color: var(--light-text-color); font-size: 2rem; text-decoration: none; text-shadow: 2px 2px var(--dark-color); }
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; }
+        .nav-links li { margin-left: 25px; }
+        .nav-links a { color: var(--light-text-color); text-decoration: none; font-weight: bold; font-size: 1.1rem; padding: 5px 0; position: relative; transition: color 0.3s ease; }
+        .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 4px; background-color: var(--accent-color); transition: width 0.3s ease; border-radius: 2px; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-color); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .section h2 { font-family: 'Press Start 2P', cursive; font-size: 2.8rem; margin-bottom: 50px; color: var(--dark-color); text-shadow: 2px 2px var(--secondary-color); }
+        .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        
+        #accueil {
+            background: url('images/fond_accueil.png') no-repeat center center/cover;
+            color: white; padding: 120px 20px; position: relative; text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+        }
+        #accueil::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.50); }
+        
+        #bande-annonce h2 {
+            color: #C5FF75;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.7), 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .accueil-content { position: relative; z-index: 2; }
+        #accueil h1 { font-family: 'Press Start 2P', cursive; font-size: 4rem; margin-bottom: 20px; }
+        #accueil p { font-size: 1.5rem; margin-bottom: 40px; }
+        .btn-primary { background-color: var(--accent-color); color: var(--dark-color); padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: transform 0.2s ease, background-color 0.3s; border: 2px solid var(--dark-color); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .btn-primary:hover { transform: translateY(-3px); background-color: #ffd65a; }
+        
+        .btn-small {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .btn-small:hover {
+            transform: translateY(-2px);
+        }
+
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; max-width: 900px; margin: 40px auto 0; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 4px solid var(--accent-color); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        #a-propos { background-color: white; }
+
+        #console {
+            background-color: var(--bg-light);
+        }
+        #console h2 {
+            color: var(--dark-color);
+            text-shadow: 2px 2px var(--secondary-color);
+        }
+        .console-content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .console-image-container {
+            flex-basis: 55%;
+            min-width: 55%;
+        }
+        .console-image-container img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .console-features {
+            flex-basis: 45%;
+            text-align: left;
+        }
+        .console-features h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        .console-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .console-features li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .console-features li::before {
+            content: '▶';
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .mechanic-card { background-color: var(--bg-light); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 2px solid var(--primary-color); }
+        .mechanic-card i { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
+        .mechanic-card h3 { font-family: 'Press Start 2P', cursive; font-size: 1.3rem; color: var(--dark-color); }
+        #histoire { text-align: left; max-width: 800px; }
+        #personnages { background-color: var(--bg-light); }
+        .character-card { background-color: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .character-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent-color); margin-bottom: 15px; }
+        .character-card h3 { font-family: 'Press Start 2P', cursive; color: var(--dark-color); font-size: 1.5rem; }
+        #actualites { background-color: white; }
+        .news-item { background-color: var(--bg-light); padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 20px; display: flex; gap: 20px; align-items: center; }
+        .news-item img { width: 250px; height: 250px; object-fit: cover; border-radius: 8px; }
+        .news-item h3 { margin: 0 0 10px 0; color: var(--dark-color); }
+        .news-item .date { font-size: 0.9em; color: #777; }
+        #goodies { background-color: var(--bg-light); }
+        .pack-card { background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); border: 3px solid var(--primary-color); display: flex; flex-direction: column; justify-content: space-between; }
+        .pack-card h3 { font-family: 'Press Start 2P', cursive; font-size: 1.8rem; color: var(--dark-color); }
+        .pack-card .price { font-size: 2.2rem; font-weight: bold; color: var(--primary-color); margin: 15px 0; }
+        .pack-card ul { list-style: none; padding: 0; text-align: left; margin: 15px 0; }
+        .pack-card ul li { margin-bottom: 10px; }
+        .pack-card ul li::before { content: '★'; color: var(--accent-color); margin-right: 10px; font-weight: bold; }
+        .pack-card .figurine-preview { width: 100%; max-width: 250px; margin: 20px auto 0; } /* Ajustement du margin */
+        .goodies-carousel-container { background-color: var(--dark-color); padding: 60px 0; }
+        .goodies-carousel-container h2 { color: var(--accent-color); text-shadow: 2px 2px var(--primary-color); }
+        .goodies-carousel { max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        
+        .carousel-item {
+            flex: 0 0 250px;
+            margin: 0 15px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .carousel-item img { width: 100%; height: 150px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; }
+        .carousel-item h4 { color: var(--accent-color); margin: 10px 0 5px; }
+        .carousel-item p { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+        .carousel-nav button { position: absolute; top: 50%; transform: translateY(-50%); background-color: var(--accent-color); border: none; color: var(--dark-color); padding: 10px 15px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .carousel-prev { left: 10px; }
+        .carousel-next { right: 10px; }
+        footer { background-color: var(--dark-color); color: var(--light-text-color); padding: 40px 20px; text-align: center; }
+        .social-icons a { color: var(--light-text-color); font-size: 1.8rem; margin: 0 15px; transition: color 0.3s ease, transform 0.2s ease; }
+        .social-icons a:hover { color: var(--accent-color); transform: translateY(-3px); }
+        .footer-links { list-style: none; padding: 0; margin: 30px 0 0 0; display: flex; justify-content: center; flex-wrap: wrap; }
+        .footer-links li { margin: 5px 15px; }
+        .footer-links a { color: var(--light-text-color); text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; color: var(--accent-color); }
+        .character-decoration-container {
+            position: relative;
+        }
+        .character-decoration {
+            position: absolute;
+            width: 300px;
+            height: auto;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .robin-on-title {
+            bottom: -300px;
+            left: -200px;
+            width: 400px;
+        }
+        .robin-peeking-side {
+            top: 300px;
+            right: -150px;
+            top: 50px;
+            transform: scaleX(-1);
+        }
+        .robin-jumping-next-to-button {
+            left: calc(100% -20px);
+            top: -50px;
+            width: 150px;
+        }
+        .robin-on-goodies-title-left {
+            bottom: -50px;
+            left: -150px;
+            width: 200px;
+            transform: scaleX(-1);
+        }
+        .robin-on-goodies-title-right {
+            bottom: -60px;
+            right: -90px;
+            width: 200px;
+        }
+        
+        @media (max-width: 900px) {
+            .character-decoration {
+                display: none;
+            }
+            .console-content-wrapper {
+                flex-direction: column;
+            }
+            .console-features {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#accueil" class="logo">Robin's</a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#a-propos">À Propos</a></li>
+                <li><a href="#console">Console</a></li>
+                <li><a href="#personnages">Personnages</a></li>
+                <li><a href="#actualites">Actualités</a></li>
+                <li><a href="#goodies">Goodies</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="accueil" class="section">
+            <div class="accueil-content">
+                <h1>L'Aventure vous attend</h1>
+                <p>Explorez un monde vibrant, affrontez des créatures mystérieuses et forgez votre propre légende.</p>
+                <a href="#goodies" class="btn-primary">Rejoignez Robin's !</a>
+            </div>
+            <div id="bande-annonce" style="margin-top: 80px;">
+                <h2>Bande-Annonce Officielle</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+        </section>
+	    <section id="a-propos" class="section character-decoration-container">
+            <img src="images/roi_chien.png" alt="" class="character-decoration robin-peeking-side">
+            <div class="character-decoration-container">
+                <h2>À Propos du Jeu</h2>
+                <img src="images/accroupi.png" alt="" class="character-decoration robin-on-title">
+            </div>
+            <div id="mecaniques-de-jeu">
+                <h3>Mécaniques de Jeu</h3>
+                <div class="section-grid">
+                    <div class="mechanic-card"><i class="fa-solid fa-people-group"></i><h3>Interaction avec les PNJ</h3><p>Discutez avec les habitants du village, accomplissez leurs quêtes et découvrez leurs secrets pour débloquer de nouvelles zones.</p></div>
+                    <div class="mechanic-card"><i class="fa-solid fa-shield-halved"></i><h3>Combats Stratégiques</h3><p>Affrontez des méchants redoutables dans des combats au tour par tour. Utilisez vos compétences à bon escient pour triompher.</p></div>
+                    <div class="mechanic-card"><i class="fa-solid fa-hand-holding-heart"></i><h3>Liez-vous d'Amitié</h3><p>Vos choix de dialogue et vos actions influencent vos relations. Devenez ami avec vos compagnons pour débloquer des attaques spéciales.</p></div>
+                </div>
+            </div>
+            <div id="histoire" style="margin-top: 80px;">
+                <h3>L'Histoire de Robin's</h3>
+                <p>Dans le royaume verdoyant d'Arboria, une ombre ancienne commence à s'étendre, corrompant la forêt et ses créatures. Vous incarnez Robin, un jeune archer au passé mystérieux, qui se retrouve malgré lui porteur d'un artefact capable de repousser les ténèbres.</p>
+                <p>Votre périple vous mènera des villages animés aux ruines oubliées. Vous devrez rassembler des alliés improbables, maîtriser des pouvoirs ancestraux et découvrir la vérité sur la source du mal qui menace de tout engloutir.</p>
+                <p>Le destin d'Arboria repose sur vos épaules. Serez-vous à la hauteur ?</p>
+            </div>
+        </section>
+
+        <section id="console" class="section">
+            <h2>Une console personnalisable à l'infini</h2>
+            <div class="console-content-wrapper">
+                <div class="console-image-container">
+                    <img src="images/console.png" alt="Photo de la console de jeu Robin's">
+                </div>
+                <div class="console-features">
+                    <h3>Caractéristiques Clés</h3>
+                    <ul>
+                        <li>Processeur custom "Leaf-chip" pour des graphismes rétro-optimisés.</li>
+                        <li>Sortie HDMI 1080p native pour une clarté parfaite sur les écrans modernes.</li>
+                        <li>Manette sans fil "Forest Joy" avec retour haptique.</li>
+                        <li>Stockage interne de 64Go extensible via carte SD.</li>
+                        <li>Coque en bois recyclé certifié des forêts d'Arboria.</li>
+                        <li>Autonomie de 8 heures en jeu nomade.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="personnages" class="section">
+            <h2>Personnages</h2>
+            <div class="section-grid">
+                <div class="character-card">
+                    <img src="images/robin_face.png" alt="Personnage Robin">
+                    <h3>Robin</h3>
+                    <p>Un archer agile et courageux, mais silencieux. Il cherche des réponses sur ses origines tout en protégeant ceux qui lui sont chers.</p>
+                </div>
+                <div class="character-card">
+                    <img src="images/chien.png" alt="Personnage Popix">
+                    <h3>Popix</h3>
+                    <p>Popix un chien abandonné par son maître maltraité il garde de son traumatisme une peur constante et une rage en lui. Prenez garde si vous le croiser il n'hésitera pas à vous attaquer !</p>
+                </div>
+                <div class="character-card">
+                    <img src="images/roi.png" alt="GroDuc">
+                    <h3>GroDuc</h3>
+                    <p>Un roi tyranique en vers son royaume qui abuse des ses pouvoirs, c'est l'ennemi juré de Robin's !</p>
+                </div>
+            </div>
+        </section>
+        <section id="actualites" class="section">
+            <h2>Actualités</h2>
+            <div class="news-item">
+                <img src="images/robins_2.png" alt="Actualité 1">
+                <div>
+                    <h3>Robin's 2 : Les Ombres du Désert annoncé !</h3>
+                    <p>La suite tant attendue est en développement. Préparez-vous à explorer de nouvelles terres arides.</p>
+                    <p class="date">Date de sortie prévue : Hiver 2026</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="images/robins_3.png" alt="Actualité 2">
+                <div>
+                    <h3>Robin's 3 "au pays des singes" disponible !</h3>
+                    <p>Un nouveau chapitre de l'histoire de Robin's arrive prochainement, avec de nouveaux personnages et défis à accomplir pour sauver les nouveaux amis de Robin's.</p>
+                    <p class="date">Date de sortie prévu : printemps 2026</p>
+                </div>
+            </div>
+        </section>
+        <section id="goodies" class="section">
+            <div id="disponible-maintenant">
+                <div class="character-decoration-container">
+                    <h2>Disponible dès maintenant !</h2>
+                    <img src="images/piece_face.png" alt="" class="character-decoration robin-on-goodies-title-left">
+                    <img src="images/piece.png" alt="" class="character-decoration robin-on-goodies-title-right">
+                </div>
+                <div class="section-grid">
+                    
+                    <!-- --- CARTE DU PACK AVENTURIER MODIFIÉE --- -->
+                    <div class="pack-card">
+                        <div>
+                            <h3>Pack Aventurier</h3><p class="price">68€</p>
+                            <ul>
+                                <li>Console de jeu personnalisable</li>
+                                <li>1 manette de jeu</li>
+                                <li>Jeu Robin's</li>
+                            </ul>
+                            <!-- IMAGE AJOUTÉE ICI -->
+                            <img src="images/image_pack_aventurier.png" alt="Contenu du Pack Aventurier" class="figurine-preview">
+                        </div>
+                        <a href="#" class="btn-primary" style="margin-top: 20px;">Acheter</a>
+                    </div>
+                    <!-- --- FIN DE LA MODIFICATION --- -->
+
+                    <div class="pack-card">
+                        <div><h3>Coffret Collectionneur</h3><p class="price">117€</p><ul><li>Console de jeu personnalisable</li><li>2 manettes de jeu</li><li>Jeu Robin's</li><li>3 Figurines customs</li><li>1 porte clef collector</li><li>T-shirt Robin's</1li></ul>
+                        <img src="images/robin_face.png" alt="Figurine de Robin" class="figurine-preview">
+                        </div>
+                        <a href="#" class="btn-primary" style="margin-top: 20px;">Acheter</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="goodies-carousel-container">
+            <h2 style="text-align: center;">Nos Goodies</h2>
+            <div class="goodies-carousel">
+                <div class="carousel-track">
+                    <div class="carousel-item">
+                        <div>
+                            <img src="images/robin_face.png" alt="Figurine Robin">
+                            <h4>Figurine de Robin</h4>
+                            <p>Figurine en PVC de 15cm</p>
+                        </div>
+                        <a href="#" class="btn-small">Acheter</a>
+                    </div>
+                    <div class="carousel-item">
+                        <div>
+                            <img src="images/tshirt.png" alt="T-shirt">
+                            <h4>T-Shirt Arboria</h4>
+                            <p>100% coton biologique</p>
+                        </div>
+                        <a href="#" class="btn-small">Acheter</a>
+                    </div>
+                    <div class="carousel-item">
+                        <div>
+                            <img src="images/porte_clef.png" alt="Porte-clef">
+                            <h4>Porte-clef</h4>
+                            <p>10 porte-clefs plaqué or à gagné</p>
+                        </div>
+                        <a href="#" class="btn-small">Acheter</a>
+                    </div>
+                    <div class="carousel-item">
+                        <div>
+                            <img src="images/puzzle.png" alt="Puzzle">
+                            <h4>Puzzle Officiel</h4>
+                            <p>223 pièces</p>
+                        </div>
+                        <a href="#" class="btn-small">Acheter</a>
+                    </div>
+		            <div class="carousel-item">
+                        <div>
+                            <img src="images/mug.png" alt="mug">
+                            <h4>Mug Feu de Camp</h4>
+                            <p>Change de couleur avec la chaleur</p>
+                        </div>
+                        <a href="#" class="btn-small">Acheter</a>
+                    </div>
+                    <div class="carousel-item">
+                        <div>
+                            <img src="images/robin_face.png" alt="Figurine Robin">
+                            <h4>Figurine de Robin</h4>
+                            <p>Figurine en PVC de 15cm</p>
+                        </div>
+                        <a href="#" class="btn-small">Acheter</a>
+                    </div>
+                    <div class="carousel-item">
+                        <div>
+                            <img src="images/tshirt.png" alt="T-shirt">
+                            <h4>T-Shirt Arboria</h4>
+                            <p>100% coton biologique</p>
+                        </div>
+                        <a href="#" class="btn-small">Acheter</a>
+                    </div>
+                </div>
+                <button class="carousel-prev carousel-nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="carousel-next carousel-nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="social-icons">
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <ul class="footer-links">
+            <li><a href="#">Service à la Clientèle</a></li>
+            <li><a href="#">Politique de Confidentialité</a></li>
+            <li><a href="#">Conditions d'Utilisation</a></li>
+            <li><a href="#">Informations Juridiques</a></li>
+        </ul>
+        <p>&copy; 2024 Robin's Games. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            window.addEventListener('scroll', () => {
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 90) { currentSectionId = section.getAttribute('id'); }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(currentSectionId)) { link.classList.add('active'); }
+                });
+            });
+            const track = document.querySelector('.carousel-track');
+            const nextButton = document.querySelector('.carousel-next');
+            const prevButton = document.querySelector('.carousel-prev');
+            if (track && track.children.length > 0) {
+                const items = Array.from(track.children);
+                const itemWidth = items[0].getBoundingClientRect().width + 30;
+                let currentIndex = 0;
+                let isMoving = false;
+                function moveToItem(index) {
+                    if (isMoving) return;
+                    isMoving = true;
+                    track.style.transform = 'translateX(-' + itemWidth * index + 'px)';
+                    currentIndex = index;
+                    setTimeout(() => {
+                        isMoving = false;
+                        if (currentIndex >= items.length / 2) {
+                            track.style.transition = 'none';
+                            currentIndex = 0;
+                            track.style.transform = 'translateX(0px)';
+                            setTimeout(() => { track.style.transition = 'transform 0.5s ease-in-out'; }, 50);
+                        }
+                    }, 500);
+                }
+                nextButton.addEventListener('click', () => { moveToItem(currentIndex + 1); });
+                prevButton.addEventListener('click', () => { if (currentIndex > 0) moveToItem(currentIndex - 1); });
+            }
+        });
+    </script>
+</body>
+</html>
